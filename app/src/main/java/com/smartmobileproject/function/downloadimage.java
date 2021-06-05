@@ -51,8 +51,8 @@ public class downloadimage extends AsyncTask<String, Void, Void> {
         fileName = String.valueOf(sdf.format(day));
 
         //웹 서버 쪽 파일이 있는 경로
-        String fileUrl = params[0];
-        Log.i(TAG, "https://phpproject-cparr.run.goorm.io/uploads/"+fileUrl);
+        String fileUrl = "https://phpproject-cparr.run.goorm.io/uploads/";
+        Log.i(TAG, "File Url>>"+fileUrl);
 
         //다운로드 폴더에 동일한 파일명이 존재하는지 확인
         String localPath = savePath + "/" + fileName + ".jpg";

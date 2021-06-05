@@ -6,8 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,7 +24,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.Backgroundservice.BackgroundService;
 import com.Backgroundservice.BootReceiver;
@@ -29,25 +34,32 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.error.VolleyError;
+import com.android.volley.misc.AsyncTask;
 import com.android.volley.misc.Exif;
+import com.android.volley.request.JsonArrayRequest;
 import com.android.volley.request.SimpleMultiPartRequest;
 import com.android.volley.toolbox.Volley;
 import com.smartmobileproject.function.ExifInfo;
+import com.smartmobileproject.function.Item;
 import com.smartmobileproject.function.KaKaoMap_funtion;
 import com.smartmobileproject.function.LocationService;
 import com.smartmobileproject.function.UploadImage;
 import com.smartmobileproject.function.downloadservice;
 import com.smartmobileproject.function.getFileList;
+import com.smartmobileproject.function.itemAdapter;
 
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -65,6 +77,10 @@ public class MapActivity extends AppCompatActivity {
     String name;
     getFileList getfile = new getFileList();
 
+    RecyclerView recyclerView;
+    ArrayList<Item> items= new ArrayList<>();
+    itemAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +97,15 @@ public class MapActivity extends AppCompatActivity {
         mBackgroundServiceIntent = new Intent(getApplicationContext(), mBackgroundService.getClass());
         name = intent.getStringExtra("name");
         email = intent.getStringExtra("email");
+
+        //새로 추가
+        recyclerView=findViewById(R.id.recycler);
+        adapter= new itemAdapter(this, items);
+        recyclerView.setAdapter(adapter);
+        LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        recyclerView.setLayoutManager(layoutManager);
+        //
+
         Log.d("name", name);
         final String url = "https://phpproject-cparr.run.goorm.io/insetDB.php";
         int i = 0;
@@ -278,11 +303,58 @@ public class MapActivity extends AppCompatActivity {
 
     }
 
+    public void clickLoad(View view) {
+
+        String serverUrl="https://phpproject-cparr.run.goorm.io/download.php";
 
 
+        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, serverUrl, null, new Response.Listener<JSONArray>() {
+            //volley 라이브러리의 GET방식은 버튼 누를때마다 새로운 갱신 데이터를 불러들이지 않음. 그래서 POST 방식 사용
+            @Override
+            public void onResponse(JSONArray response) {
+                Toast.makeText(MapActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
 
 
+                //파라미터로 응답받은 결과 JsonArray를 분석
+
+                items.clear();
+                adapter.notifyDataSetChanged();
+                try {
+
+                    for(int i=0;i<response.length();i++){
+                        JSONObject jsonObject= response.getJSONObject(i);
+
+                        String email=jsonObject.getString("email");
+                        String longtitude=jsonObject.getString("longtitude");
+                        String latitude=jsonObject.getString("latitude");
+                        String imgPath=jsonObject.getString("imgPath");
+                        String date=jsonObject.getString("date");
+
+                        //이미지 경로의 경우 서버 IP가 제외된 주소이므로(uploads/xxxx.jpg) 바로 사용 불가.
+                        imgPath = "https://phpproject-cparr.run.goorm.io/"+imgPath;
+
+                        items.add(0,new Item(email, longtitude, latitude, imgPath));
+                        adapter.notifyItemInserted(0);
+                    }
+                } catch (JSONException e) {e.printStackTrace();}
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MapActivity.this, "ERROR", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //실제 요청 작업을 수행해주는 요청큐 객체 생성
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+
+        //요청큐에 요청 객체 생성
+        requestQueue.add(jsonArrayRequest);
     }
+}
+
+
 
 
 

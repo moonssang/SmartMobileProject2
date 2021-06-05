@@ -25,7 +25,6 @@ public class downloadservice extends AppCompatActivity {
 
     public String requestdownloadurl(String requestfile, String request_url){
 
-
         String request = requestfile + request_url;
 
         JsonParsing json = new JsonParsing();

@@ -1,6 +1,5 @@
 package com.smartmobileproject.activity;
 
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -287,7 +286,6 @@ public class MapActivity extends AppCompatActivity {
             }
         });
 
-
         smpr.addStringParam("longtitude", String.valueOf(longtitude));
         smpr.addStringParam("latitude", String.valueOf(latitude));
         smpr.addStringParam("email", email);
@@ -300,22 +298,17 @@ public class MapActivity extends AppCompatActivity {
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         Log.d("smpr", String.valueOf(smpr));
         requestQueue.add(smpr);
-
     }
 
     public void clickLoad(View view) {
 
         String serverUrl="https://phpproject-cparr.run.goorm.io/download.php";
 
-
         JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, serverUrl, null, new Response.Listener<JSONArray>() {
-            //volley 라이브러리의 GET방식은 버튼 누를때마다 새로운 갱신 데이터를 불러들이지 않음. 그래서 POST 방식 사용
+
             @Override
             public void onResponse(JSONArray response) {
                 Toast.makeText(MapActivity.this, response.toString(), Toast.LENGTH_SHORT).show();
-
-
-                //파라미터로 응답받은 결과 JsonArray를 분석
 
                 items.clear();
                 adapter.notifyDataSetChanged();
@@ -330,7 +323,6 @@ public class MapActivity extends AppCompatActivity {
                         String imgPath=jsonObject.getString("imgPath");
                         String date=jsonObject.getString("date");
 
-                        //이미지 경로의 경우 서버 IP가 제외된 주소이므로(uploads/xxxx.jpg) 바로 사용 불가.
                         imgPath = "https://phpproject-cparr.run.goorm.io/"+imgPath;
 
                         items.add(0,new Item(email, longtitude, latitude, imgPath));
@@ -346,10 +338,7 @@ public class MapActivity extends AppCompatActivity {
             }
         });
 
-        //실제 요청 작업을 수행해주는 요청큐 객체 생성
         RequestQueue requestQueue= Volley.newRequestQueue(this);
-
-        //요청큐에 요청 객체 생성
         requestQueue.add(jsonArrayRequest);
     }
 }

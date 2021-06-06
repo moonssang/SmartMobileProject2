@@ -6,7 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon" />
+    </FrameLayout>
+
     <com.kakao.usermgmt.LoginButton
+        android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -29,7 +29,6 @@ public class itemAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater= LayoutInflater.from(context);
         View itemView=inflater.inflate(R.layout.recycle_item,parent,false);
-
         VH holder=new VH(itemView);
         return holder;
     }
@@ -37,11 +36,8 @@ public class itemAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         VH vh= (VH) holder;
-
         Item item= items.get(position);
-        vh.tvName.setText(item.getEmail());
-        vh.tvDate.setText(item.getLatitude());
-        vh.tvMsg.setText(item.getLongtitude());
+        vh.txtemail.setText(item.getEmail());
 
         Glide.with(context).load(item.getImgPath()).into(vh.iv);
     }
@@ -53,17 +49,13 @@ public class itemAdapter extends RecyclerView.Adapter {
 
     class VH extends RecyclerView.ViewHolder{
 
-        TextView tvName;
-        TextView tvDate;
-        TextView tvMsg;
+        TextView txtemail;
         ImageView iv;
 
         public VH(@NonNull View itemView) {
             super(itemView);
 
-            tvName=itemView.findViewById(R.id.txtemail);
-            tvDate=itemView.findViewById(R.id.txtlatitude);
-            tvMsg=itemView.findViewById(R.id.txtlongtitude);
+            txtemail=itemView.findViewById(R.id.txtemail);
             iv=itemView.findViewById(R.id.iv);
 
         }

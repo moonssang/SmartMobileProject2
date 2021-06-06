@@ -43,6 +43,7 @@ import com.smartmobileproject.function.Item;
 import com.smartmobileproject.function.KaKaoMap_funtion;
 import com.smartmobileproject.function.LocationService;
 import com.smartmobileproject.function.UploadImage;
+import com.smartmobileproject.function.downloadimage;
 import com.smartmobileproject.function.downloadservice;
 import com.smartmobileproject.function.getFileList;
 import com.smartmobileproject.function.itemAdapter;
@@ -76,6 +77,7 @@ public class MapActivity extends AppCompatActivity {
     String name;
     getFileList getfile = new getFileList();
 
+
     RecyclerView recyclerView;
     ArrayList<Item> items= new ArrayList<>();
     itemAdapter adapter;
@@ -97,13 +99,13 @@ public class MapActivity extends AppCompatActivity {
         name = intent.getStringExtra("name");
         email = intent.getStringExtra("email");
 
-        //새로 추가
+        // 추가
         recyclerView=findViewById(R.id.recycler);
         adapter= new itemAdapter(this, items);
         recyclerView.setAdapter(adapter);
         LinearLayoutManager layoutManager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
         recyclerView.setLayoutManager(layoutManager);
-        //
+
 
         Log.d("name", name);
         final String url = "https://phpproject-cparr.run.goorm.io/insetDB.php";
@@ -233,6 +235,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     private void UploadImage(String[] imgList, String email) throws IOException {
+
         Float inlongtitude;
         Float inlatitude;
         String todaydate;
@@ -270,7 +273,7 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void Upload(String imgPath, Float longtitude, Float latitude, String email, String date) {
-
+        setContentView(R.layout.activity_map);
         String serverUrl = "https://phpproject-cparr.run.goorm.io/UploadImage.php";
 
         SimpleMultiPartRequest smpr = new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
@@ -301,10 +304,11 @@ public class MapActivity extends AppCompatActivity {
     }
 
     public void clickLoad(View view) {
+        setContentView(R.layout.activity_imglist);
+        String serverUrl="https://phpproject-cparr.run.goorm.io/loadDB.php";
 
-        String serverUrl="https://phpproject-cparr.run.goorm.io/download.php";
-
-        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, serverUrl, null, new Response.Listener<JSONArray>() {
+        JsonArrayRequest jsonArrayRequest= new JsonArrayRequest(Request.Method.POST, serverUrl,
+                null, new Response.Listener<JSONArray>() {
 
             @Override
             public void onResponse(JSONArray response) {
@@ -318,14 +322,11 @@ public class MapActivity extends AppCompatActivity {
                         JSONObject jsonObject= response.getJSONObject(i);
 
                         String email=jsonObject.getString("email");
-                        String longtitude=jsonObject.getString("longtitude");
-                        String latitude=jsonObject.getString("latitude");
                         String imgPath=jsonObject.getString("imgPath");
-                        String date=jsonObject.getString("date");
 
                         imgPath = "https://phpproject-cparr.run.goorm.io/"+imgPath;
 
-                        items.add(0,new Item(email, longtitude, latitude, imgPath));
+                        items.add(0,new Item(name, imgPath));
                         adapter.notifyItemInserted(0);
                     }
                 } catch (JSONException e) {e.printStackTrace();}
@@ -340,8 +341,10 @@ public class MapActivity extends AppCompatActivity {
 
         RequestQueue requestQueue= Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
+
     }
 }
+
 
 
 

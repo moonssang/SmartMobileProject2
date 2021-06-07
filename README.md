@@ -18,7 +18,7 @@
   - [3단계](#3단계)
 
 
-- [APP 주요 기능](#App)
+- [APP 주요 기능](#KakaoLogin)
   - [KaKaoLogin](#KakaoLogin)
   - [KakaoMap](#KakaoMap)
   - [IMG Upload](#Upload)

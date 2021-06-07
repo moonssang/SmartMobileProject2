@@ -47,7 +47,7 @@
   ### 2단계
   
   ### 3단계
-  MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.
+  MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.<
   방법: Project -> app -> libs -> libDaumMapAndroid.jar 우클릭 -> copy -> copy path -> Absolute path -> build.gradle에 넣어주기
   
   

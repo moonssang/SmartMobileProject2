@@ -18,11 +18,23 @@
   - [3단계](#step3)
 
 
-- [APP 주요 기능](#project)
+- [APP 주요 기능](#App)
   - [알고리즘](#algorism)
   - [KaKao Login](#login)
   - [KakaoMap](#map)
   - [IMG Upload](#upload)
   - [IMG Download](#download)
 
-- [차별화 및 수익성 ](#definitions)
+- [기대효과](#definitions)
+  - [차별화](#expectation)
+  - [수익성](#profitabiltiy)
+  
+  ----------------------------------------------------
+  
+ ## 주제
+  ### 선정 배경 및 목적
+  
+ ## 다운로드 받기 전 필요한 부분
+  ### 1단계
+  ### 2단계
+  ### 3

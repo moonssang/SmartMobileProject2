@@ -12,23 +12,23 @@
 - [주제](#title)
   - [선정 배경 및 목적](#title)
 
-- [다운로드 받기 전 필요한 부분 ](#step1)
-  - [1단계](#step1)
-  - [2단계](#step2)
-  - [3단계](#step3)
+- [다운로드 받기 전 필요한 부분](#1단계)
+  - [1단계](#1단계)
+  - [2단계](#2단계)
+  - [3단계](#3단계)
 
 
 - [APP 주요 기능](#App)
-  - [KaKao Login](#KakaoLogin)
+  - [KaKaoLogin](#KakaoLogin)
   - [KakaoMap](#KakaoMap)
   - [IMG Upload](#Upload)
   - [IMG Download](#Download)
   
-- [알고리즘](#Alogrism)
+- [알고리즘](#알고리즘)
 
-- [기대효과](#definitions)
-  - [차별화](#expectation)
-  - [수익성](#profitabiltiy)
+- [기대효과](#기대효과)
+  - [차별화](#차별화)
+  - [수익성](#수익성)
   
   ----------------------------------------------------
   
@@ -46,12 +46,21 @@
   
   ## APP 주요 기능
    ### KakaoLogin
+   
    ### KakaoMap
-   ### IMG Upload
-   ### IMG Download
+   
+   ### Upload
+   
+   ### Download
+   
+   
    
   ## 알고리즘
   
+  
+  
   ## 기대효과
-  ### 차별화
-  ### 수익성
+  
+   ### 차별화
+   
+   ### 수익성

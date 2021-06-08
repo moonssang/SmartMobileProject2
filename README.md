@@ -301,6 +301,8 @@ include "sqldisconnect.php";
 |      업로드에 필요한 데이터를 저장한다.       |    업로드 한 이미지가 서버에 저장된다.   |
 
 
+
+
 ---------------------------------------------------------------------------------------------------------------------------
    ### Download
    1. KakoMap IMG Download주요 코드 설명 
@@ -407,7 +409,13 @@ if($d < 1) {
   |      SplashActivity |  Access  |
 | :-----------------------: | :----------------:  | 
 | ![image](https://user-images.githubusercontent.com/80194089/121171134-100c8080-c891-11eb-93fb-f4930eba1131.png)| ![image](https://user-images.githubusercontent.com/80194089/121171160-1995e880-c891-11eb-8f08-3a8b8708a717.png) |
-|      어플리케이션 시작시 나오는 화면이다.    |    권한 요청 사진이다.   |
+|      어플리케이션 시작시 나오는 화면입니다.    |    권한 요청 사진입니다.   |
+
+ |      KakaoLogin Page |  KakaoLogin  |
+| :-----------------------: | :----------------:  | 
+| ![image](https://user-images.githubusercontent.com/80194089/121171661-b9ec0d00-c891-11eb-973f-c33eae275a95.png)| ![image](https://user-images.githubusercontent.com/80194089/121171685-c2dcde80-c891-11eb-8a09-fe3012e1512c.png) |
+|      카카오 로그인 시작 페이지입니다.   |  이메일과 비밀번호를 입력하여 로그인하는 페이지입니다.    |
+  
   
 
   ## 차별화

@@ -13,9 +13,9 @@
 - [주제](#Topic)
   - [선정 배경 및 목적](#Topic)
 
-- [다운로드 받기 전 필요한 부분](#goormIDE)
-  - [goormIDE](#goormIDE)
-  - [android](#android
+- [다운로드 받기 전 필요한 부분](#groomIDE)
+  - [goormIDE](#groomIDE)
+  - [android](#android)
   - [KakaoMap](#KakoMap)
  
 

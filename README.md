@@ -46,10 +46,13 @@
   
   ### KakaoMap
    MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.<br>
-  방법: ![KakaoTalk_20210608_151112955](https://user-images.githubusercontent.com/79883555/121132326-f86ed100-c86b-11eb-99b5-62b484881570.jpg)
-![KakaoTalk_20210608_151112955_01](https://user-images.githubusercontent.com/79883555/121132708-7206bf00-c86c-11eb-8fd3-3b381528d43c.jpg)
-![KakaoTalk_20210608_151112955_02](https://user-images.githubusercontent.com/79883555/121132714-73d08280-c86c-11eb-8ff6-ebbdfe3d1003.jpg)
-![KakaoTalk_20210608_151112955_03](https://user-images.githubusercontent.com/79883555/121132724-77fca000-c86c-11eb-8e57-7511536c875b.jpg)
+   프로젝트 파일에서 app -> libs 폴더를 열어보면 libDaumMapAndroid.jar 파일이 있는 것을 확인할 수 있습니다.
+![KakaoTalk_20210608_151112955_01](https://user-images.githubusercontent.com/79883555/121132708-7206bf00-c86c-11eb-8fd3-3b381528d43c.jpg)<br>
+ libDaumMapAndroid.jar 파일을 우클릭하여 Copy -> Copy Path를 눌러줍니다.
+![KakaoTalk_20210608_151112955_02](https://user-images.githubusercontent.com/79883555/121132714-73d08280-c86c-11eb-8ff6-ebbdfe3d1003.jpg)<br>
+다음으로 Absolute Path를 눌러주면  libDaumMapAndroid.jar파일의 절대경로가 복사됩니다.
+![KakaoTalk_20210608_151112955_03](https://user-images.githubusercontent.com/79883555/121132724-77fca000-c86c-11eb-8e57-7511536c875b.jpg)<br>
+복사한 절대경로를 Gradle Scripts의 build.gradle(Module)의 dependecies안에 있는 implementation files안에 넣어줍니다.
 ![5](https://user-images.githubusercontent.com/79883555/121133569-7a132e80-c86d-11eb-82c3-c516f42e4d9f.JPG)
 
 

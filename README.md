@@ -46,6 +46,7 @@
   
   ### KakaoMap
    MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.<br>
+   <방법><br>
    프로젝트 파일에서 app -> libs 폴더를 열어보면 libDaumMapAndroid.jar 파일이 있는 것을 확인할 수 있습니다.
 ![KakaoTalk_20210608_151112955_01](https://user-images.githubusercontent.com/79883555/121132708-7206bf00-c86c-11eb-8fd3-3b381528d43c.jpg)<br>
  libDaumMapAndroid.jar 파일을 우클릭하여 Copy -> Copy Path를 눌러줍니다.

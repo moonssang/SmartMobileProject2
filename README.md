@@ -375,7 +375,7 @@ include "sqldisconnect.php";
    - 사용자가 업로드한 이미지 파일과 공유대상자의 좌표를 계산하는 코드이다.
    
 | param double $lat1  | param double $lon1 | param double $lat2 | param double $lon2 |
-| :----------------- :| :----------------: | :----------------: | :----------------: |
+| :-----------------:| :----------------: | :----------------: | :----------------: |
 | 이미지파일 좌표 위도 | 이미지파일 좌표 경도 | 공유대상자 좌표 위도 |공유대상자 좌표 경도 |
 
 ```php
@@ -402,8 +402,12 @@ if($d < 1) {
     
   ### IMGAlgorithm
   
-  ## Launch
   
+  ## Launch
+  |      SplashActivity |  Access  |
+| :-----------------------: | :----------------:  | 
+| ![image](https://user-images.githubusercontent.com/80194089/121171134-100c8080-c891-11eb-93fb-f4930eba1131.png)| ![image](https://user-images.githubusercontent.com/80194089/121171160-1995e880-c891-11eb-8f08-3a8b8708a717.png) |
+|      어플리케이션 시작시 나오는 화면이다.    |    권한 요청 사진이다.   |
   
 
   ## 차별화

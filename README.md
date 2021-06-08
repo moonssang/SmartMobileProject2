@@ -408,19 +408,23 @@ if($d < 1) {
 
 
   ## Launch
+  
   1. 앱이 실행이 되면 나오는 spalsh page와 사용자의 위치를 엑세스하여 접근을 허용하는 화면입니다.<br><br>
+  
 |      SplashActivity         |    Access   |     
 | :-----------------------: | :----------------:  | 
 | ![image](https://user-images.githubusercontent.com/79883555/121174884-624fa080-c895-11eb-9bc4-32142a4a09e0.png)| ![image](https://user-images.githubusercontent.com/79883555/121174902-68de1800-c895-11eb-8e11-f6f5ed7e6988.png) |
 |      어플리케이션 시작시 나오는 화면입니다.    |    권한 요청 사진입니다.    |<br><br>
 
 2. 사용자의 위치 정보를 접근 허용하면 카카오 로그인 페이지로 이동하게 됩니다. 다음 사진들은 카카오계정 로그인을 하는 페이지입니다.<br><br>
+
 |      KakaoLogin Page      |  KakaoLogin         |
 | :-----------------------: | :----------------:  | 
 | ![image](https://user-images.githubusercontent.com/80194089/121171661-b9ec0d00-c891-11eb-973f-c33eae275a95.png) | ![image](https://user-images.githubusercontent.com/80194089/121171685-c2dcde80-c891-11eb-8a09-fe3012e1512c.png) |
 |      카카오 로그인 시작 페이지입니다.   |  이메일과 비밀번호를 입력하여 로그인하는 페이지입니다.    |<br><br>
 
 3. 공유하고자 하는 대상의 이메일을 입력하고 공유대상을 추가하는 페이지입니다. 공유대상을 추가하면 자신의 위치가 kakaoMap에 표시가 되고 오른쪽 메뉴바를 클릭하면 오늘 찍은 사진이 서버에 자동으로 업로드 됩니다. 또한 다운로드 된 사진은 마지막 사진과 같이 최근 날짜순으로 저장됩니다.<br><br>
+
 |     Add Share user |  KakaoMAp  | Downloadlist |
 | :----------------: | :--------: | :----------: | 
 | ![image](https://user-images.githubusercontent.com/80194089/121172949-33382f80-c893-11eb-8e1c-40d80edb39a3.png) | ![image](https://user-images.githubusercontent.com/80194089/121173021-46e39600-c893-11eb-9974-22a781baf5a6.png) | ![image](https://user-images.githubusercontent.com/80194089/121173047-519e2b00-c893-11eb-9d07-aefd82cb09c0.png) |

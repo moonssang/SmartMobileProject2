@@ -15,8 +15,9 @@
 
 - [다운로드 받기 전 필요한 부분](#goormIDE)
   - [goormIDE](#goormIDE)
+  - [android](#android
   - [KakaoMap](#KakoMap)
-  - [android](#android)
+ 
 
 - [APP 주요 기술](#KakaoLogin)
   - [KaKaoLogin](#KakaoLogin)
@@ -31,8 +32,7 @@
 - [배운점](#배운점)
  
   
-
-  
+-----------------------------------------------------------------------------------------
  ## Topic
   ### 선정 배경 및 목적
   - 프로젝트 주제를 선정하기에 앞서 일상생활에서 겪는 불편함을 생각해보았습니다. 가족이나 친구, 연인끼리 여행을 가면 주로 한 사람이 모든 사진을 찍게 되는데 이 후 모든 사진을 다시 옮겨 주어야하는 불편함이 발생합니다. 
@@ -40,16 +40,31 @@
   - 근처 몇 미터 반경 안에 자신이 등록한 커뮤니티 사용자 존재 시 사진을 자동으로 공유하는 기능을 구현하였습니다.
   
   
+  
  ## 다운로드 받기 전 필요한 부분
   ### groomIDE
-   - 어플리케이션을 실행시키기 위해서 웹 서버가 구축되어있어야 합니다. 웹서버는 groomIDE를 사용하였으며, 웹서버 주소와 php 파일명을 안드로이드 request class에 입력해줍니다.
-   - groomIDE 링크 : https://ide.goorm.io/my/dashboard <br>
+  
+  - 어플리케이션을 실행시키기 위해서 웹 서버가 구축되어있어야 합니다. 웹서버는 groomIDE를 사용하였으며, 웹서버 주소와 php 파일명을 안드로이드 request class에 입력해줍니다.
+  - groomIDE 링크 : https://ide.goorm.io/my/dashboard <br>
    
    1. 로그인을 한 후 실행 버튼을 눌러 구름 서버에 접속합니다. (교수님께 보내드린 계정으로 접속하시면 됩니다)
     ![image](https://user-images.githubusercontent.com/80194089/121145677-28bd6c00-c87a-11eb-8111-6afbf20ea3eb.png) <br>
   
    2. 화면과 같이 화살표 버튼을 클릭하여 서버(new run.php)를 연결해줍니다. 
     ![image](https://user-images.githubusercontent.com/80194089/121147471-db41fe80-c87b-11eb-82de-b58fca48da49.png)
+    
+  
+  
+  ### android
+  - 프로젝트를 다운 받고 실행하는 과정입니다.
+  
+  1. 안드로이드 스튜디오 초기 실행 과정이며, Get From Version Control을 눌러줍니다.
+   ![image](https://user-images.githubusercontent.com/80194089/121148656-ed706c80-c87c-11eb-8a3f-baedca6b7fce.png)
+
+  2. url 부분에 https://github.com/youngho98/smartmobileproject.git 주소를 넣어준 후, clone을 눌러주면 프로젝트가 실행됩니다.
+   ![image](https://user-images.githubusercontent.com/80194089/121148756-0416c380-c87d-11eb-9600-9e40d33fb67b.png)
+   
+  3. master에서 'final branch'로 check out 해줍니다.
 
 
   ### KakaoMap
@@ -65,7 +80,9 @@
    4. 복사한 절대경로를 Gradle Scripts의 build.gradle(Module)의 dependecies안에 있는 implementation files안에 넣어줍니다.
 ![image](https://user-images.githubusercontent.com/80194089/121142808-5359f580-c877-11eb-866d-c555f7d14994.png)
 
-  ### android
+
+  
+   
   
   ## APP 주요 기술
    ### KakaoLogin

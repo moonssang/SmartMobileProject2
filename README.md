@@ -15,7 +15,7 @@
 
 - [다운로드 받기 전 필요한 부분](#goormIDE)
   - [goormIDE](#goormIDE)
-  - [android](#android)
+  - [android](#android
   - [KakaoMap](#KakoMap)
  
 
@@ -47,7 +47,7 @@
   - 어플리케이션을 실행시키기 위해서 웹 서버가 구축되어있어야 합니다. 웹서버는 groomIDE를 사용하였으며, 웹서버 주소와 php 파일명을 안드로이드 request class에 입력해줍니다.
   - groomIDE 링크 : https://ide.goorm.io/my/dashboard <br>
    
-   1. 로그인을 한 후 실행 버튼을 눌러 구름 서버에 접속합니다. (교수님께 보내드린 계정으로 접속하시면 됩니다)
+   1. 로그인을 한 후 실행 버튼을 눌러 구름 서버에 접속합니다. (교수님께 보내드린 계정으로 접속하시면 됩니다.)
     ![image](https://user-images.githubusercontent.com/80194089/121145677-28bd6c00-c87a-11eb-8111-6afbf20ea3eb.png) <br>
   
    2. 화면과 같이 화살표 버튼을 클릭하여 서버(new run.php)를 연결해줍니다. 

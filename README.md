@@ -18,12 +18,13 @@
   - [android](#android)
   - [KakaoMap](#KakoMap)
  
-
-- [APP 주요 기술](#KakaoLogin)
+- [APP 주요 코드 및 실행과정](#KakaoLogin)
   - [KaKaoLogin](#KakaoLogin)
+  - [Background Location](#Background)
   - [KakaoMap](#KakaoMap)
   - [IMG Upload](#Upload)
   - [IMG Download](#Download)
+  - [실행화면](#launch)
   
 - [알고리즘](#알고리즘)
 
@@ -80,12 +81,117 @@
    4. 복사한 절대경로를 Gradle Scripts의 build.gradle(Module)의 dependecies안에 있는 implementation files안에 넣어줍니다.
 ![image](https://user-images.githubusercontent.com/80194089/121142808-5359f580-c877-11eb-866d-c555f7d14994.png)
 
-
-  
+-----------------------------------------------------------------------------------------------------------------------  
    
+  ## APP 주요 코드 및 실행 과정
   
-  ## APP 주요 기술
    ### KakaoLogin
+   1. KaKaoLogin 주요 코드 설명
+   - 로그인에 성공하게 되면 자신의 이메일 정보를 데이터베이스에 저장하고 공유대상이 설정되어 있는 지를 판단합니다. 이 때 설정된 공유대상이 있다면 맵 액티비티로 이동하고, 공유대상이 설정되어 있지 않다면 공유대상설정 액티비티로 이동하여 공유대상의 이메일을 입력하여 데이터베이스에 저장해서 공유대상 정보를 저장하고 공유대상을 식별할 때 사용됩니다.
+   
+   - KakaologinActivity 코드 
+   
+   ```java
+    String serverUrl="https://phpproject-cparr.run.goorm.io/Kakaouser.php";
+
+        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("testresponse",response);
+                String[] strarr =response.split("#");
+                Log.d("strarr1",strarr[0]);
+                setResultboolean(strarr[0]);
+                setShared_email(strarr[1]);
+                Log.d("threadstop","stop");
+                Log.d("the11",getResultboolean());
+                String hi = getResultboolean();
+                Log.d("hihi",hi);
+                boolean bool= Boolean.parseBoolean(hi);
+                if(bool==true){
+                    Log.d("resultfalse",getResultboolean());
+                    Intent intent = new Intent(KaKaoLoginActivity.this, MapActivity.class);
+                    intent.putExtra("email", email); //파싱한 값을 넘겨줌
+                    intent.putExtra("shared_email", shared_email);
+                    Log.d("sharedemail",shared_email);
+                    startActivity(intent);
+                }
+                else if(bool==false){
+                    Log.d("threadstart","start");
+                    Intent intent = new Intent(KaKaoLoginActivity.this,ShareActivity.class);
+                    Log.d("emailtest",email);
+                    intent.putExtra("email", email); //파싱한 값을 넘겨줌
+                    startActivity(intent);
+                }
+            }          
+   ```
+   
+   - KakaoUser.php (서버)
+   ```php
+   <?php
+
+$connect = mysqli_connect("127.0.0.1", "root1", "1234", "Project");
+
+$email = $_POST["email"];
+$sql = "select * from Shareduser where email = '".$email."'";
+$result = mysqli_query($connect, $sql);
+
+if(mysqli_num_rows($result) > 0) {
+   $row = mysqli_fetch_array($result);
+   $response = "true#".$row["shared_email"];
+   echo $response;
+}
+else if(mysqli_num_rows($result) == 0) {
+   $response = "false#null";
+   echo $response;   
+}
+
+include "sqldisconnect.php";
+   
+?>
+   
+   ```
+   
+   - KakaoUser 데이터 저장
+    Shareduser table에 사용자 email과 shared_email (공유 대상자 이메일) 데이터를 저장합니다.
+    ![image](https://user-images.githubusercontent.com/80194089/121157974-f6653c00-c884-11eb-9483-54b3578c8cb6.png)
+
+   
+   
+   ### Background
+   1. Background Service 주요 코드 설명
+   - 백그라운드 로케이션 기능은 백그라운드 쓰레드를 생성함으로써 앱이 종료되어도 정해진 주기에 따라 사용자의 위치정보를 추적하여 데이터베이스에 저장함으로써 사용자의 위치를 주기적으로 갱신하는 알고리즘입니다. 
+   
+   - Background Service 코드 
+   
+   ```java
+     if (ActivityCompat.checkSelfPermission(context1, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context1, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                            Log.d("권한설정", "권한설정을 해주세요.");
+                        }
+
+                        if (LocationManager.GPS_PROVIDER != null) {
+                            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1000, locationListener);
+                        } else if (LocationManager.NETWORK_PROVIDER != null) {
+                            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1000, locationListener);
+                        } else {
+                            Log.d("위치정보", "위치정보를 불러올수가 없습니다......ㅠㅠㅠ");
+                        }
+                        long time = System.currentTimeMillis();
+                        Date now = new Date(time);
+                        SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:ddHH:mm:ss");
+                        String nowdate = format.format(now);
+
+
+                        request = url + "?longtitude="+getlongtitude()+"&latitude="+getlongtitude()+"&email="+useremail+"&time="+nowdate;
+                        Log.d("request",request);
+                        gethttpresponse.execute(request);
+
+                    }
+                },0);
+   ```
+   
+   
+   
+   
    
    ### KakaoMap
    

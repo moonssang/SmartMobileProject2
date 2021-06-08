@@ -374,7 +374,7 @@ include "sqldisconnect.php";
    ```
    
    4. groomIDE 서버 : coordinate.php
-   - 사용자가 업로드한 이미지 파일과 공유대상자의 좌표를 계산하는 코드이다.
+   - 사용자가 업로드한 이미지 파일과 공유대상자의 좌표를 계산하는 코드이다. 거리가 1km 이내 일 경우 사진을 다운로드 받을 수 있도록 echo문으로 전송하였습니다. 
    
 | param double $lat1  | param double $lon1 | param double $lat2 | param double $lon2 |
 | :-----------------:| :----------------: | :----------------: | :----------------: |
@@ -403,7 +403,8 @@ if($d < 1) {
 ```
     
   ### IMGAlgorithm
-  
+  ![image](https://user-images.githubusercontent.com/80194089/121171981-28c96600-c892-11eb-9752-e86bd954dbcc.png)
+
   
   ## Launch
   |      SplashActivity |  Access  |

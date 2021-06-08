@@ -45,7 +45,7 @@
   어플리케이션을 실행시키기 위해서 웹 서버가 구축되어있어야 합니다. 웹서버 주소와 php 파일명을 안드로이드 request class에 입력해줍니다.
   
   ### KakaoMap
-   MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.
+   MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.<br>
   방법: 
 
   

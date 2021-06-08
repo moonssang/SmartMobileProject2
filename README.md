@@ -21,9 +21,8 @@
 - [APP 주요 코드](#KakaoLogin)
   - [KaKaoLogin](#KakaoLogin)
   - [Background Location](#Background)
-  - [KakaoMap](#KakaoMap)
-  - [IMG Upload](#Upload)
-  - [IMG Download](#Download)
+  - [KakaoMap IMG Upload](#Upload)
+  - [KakaoMap IMG Download](#Download)
   
 - [알고리즘](#알고리즘)
 
@@ -90,7 +89,7 @@
    1. KaKaoLogin 주요 코드 설명
    - 로그인에 성공하게 되면 자신의 이메일 정보를 데이터베이스에 저장하고 공유대상이 설정되어 있는 지를 판단합니다. 이 때 설정된 공유대상이 있다면 맵 액티비티로 이동하고, 공유대상이 설정되어 있지 않다면 공유대상설정 액티비티로 이동하여 공유대상의 이메일을 입력하여 데이터베이스에 저장해서 공유대상 정보를 저장하고 공유대상을 식별할 때 사용됩니다.
    
-   - KakaologinActivity 코드 
+   2. KakaologinActivity 코드 
    
    ```java
     String serverUrl="https://phpproject-cparr.run.goorm.io/Kakaouser.php";
@@ -126,8 +125,9 @@
             }          
    ```
    
-   - KakaoUser.php (서버)
-   SharedUser table에 $email(=사용자 email)과 $shared_email(=공유 대상자 이메일)을 echo문으로 데이터를 전송합니다.
+   3. KakaoUser.php (서버)
+   - SharedUser table에 $email(=사용자 email)과 $shared_email(=공유 대상자 이메일)을 echo문으로 데이터를 전송합니다.
+   
    ```php
    <?php
 
@@ -153,8 +153,8 @@ include "sqldisconnect.php";
    
    ```
    
-   - KakaoUser 데이터 저장
-    Shareduser table에 사용자 email과 shared_email (공유 대상자 이메일) 데이터를 저장합니다.
+   4. KakaoUser 데이터 저장
+   - Shareduser table에 사용자 email과 shared_email (공유 대상자 이메일) 데이터를 저장합니다.
     ![image](https://user-images.githubusercontent.com/80194089/121157974-f6653c00-c884-11eb-9483-54b3578c8cb6.png)
 
    
@@ -163,8 +163,9 @@ include "sqldisconnect.php";
    1. Background Service 주요 코드 설명
    - 백그라운드 로케이션 기능은 백그라운드 쓰레드를 생성함으로써 앱이 종료되어도 정해진 주기에 따라 사용자의 위치정보를 추적하여 데이터베이스에 저장함으로써 사용자의 위치를 주기적으로 갱신하는 알고리즘입니다. 
    
-   - Background Service 코드 
-    서버에서 불러온 위도, 경도 값으로 사용자 위치 정보를 불러옵니다.
+   2. android studio : Background Service 코드
+   - 서버에서 불러온 위도, 경도 값으로 사용자 위치 정보를 불러옵니다.
+    
    ```java
      if (ActivityCompat.checkSelfPermission(context1, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context1, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             Log.d("권한설정", "권한설정을 해주세요.");
@@ -191,8 +192,9 @@ include "sqldisconnect.php";
                 },0);
    ```
    
-   - UploadBackground Loaction.php  
-   사용자 위도, 경도, 이메일, 날짜 정보 데이터를 GET형태로 전송합니다.
+   3. groomIDE 서버 : UploadBackground Loaction.php  
+   - 사용자 위도, 경도, 이메일, 날짜 정보 데이터를 GET형태로 전송합니다.
+ 
    ```php
    <?php
 	
@@ -217,22 +219,106 @@ include "sqldisconnect.php";
    
    ```
    
-   ### KakaoMap
-   
    ### Upload
+   1. KakoMap IMG Upload 주요 코드 설명 
+   - 이 코드는 이미지가 업로드 할 때 사용되는 코드입니다. 이미지 업로드 알고리즘은 공유대상으로 지정된 사람이 근처 1km이내에 존재할 경우 당일에 찍은 모든 사진이 자동으로 업로드가 되는 방식입니다. 
    
+   2.  android studio : Map Activity (IMG Upoad) 
+   - server Url로 php와 android studio를 연동합니다. IMG Upload 할때 필요한 사용자 정보(email, date, imgPath)를 불러옵니다. 
+   
+   ```Java
+   public void Upload(String imgPath,String email,String date){
+
+        String serverUrl="https://phpproject-cparr.run.goorm.io/UploadImage.php";
+
+        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("hellosuccess100",response);
+            }
+        }, new Response.ErrorListener() {
+
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        smpr.addStringParam("email",email);
+        smpr.addStringParam("date",date);
+        smpr.addStringParam("path",imgPath);
+        smpr.addFile("img", imgPath);
+
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        Log.d("smpr", String.valueOf(smpr));
+        requestQueue.add(smpr);
+
+
+    }
+   ```
+   
+   3. groomIDE 서버 : UploadImage.php
+   - 이미지 파일을 영구보관하기 위해 이미지 파일의 세부정보 받아와서 임시 저장소인 'uploads' 폴더에 이미지를 이동시킨다. 
+  
+  ```php
+   <?php
+
+	$connect = mysqli_connect("127.0.0.1","root1","1234","Project");
+	$email= $_POST['email'];
+	$date = $_POST['date']; 
+	$path = $_POST['path'];
+	$file= $_FILES['img'];
+        $srcName= $file['name'];
+        $tmpName= $file['tmp_name']; 
+ 	
+	$query = "select * from File_Info where email = '".$email."' And file_name = '".$srcName."'";
+	$result = mysqli_query($connect,$query);
+	
+	if(mysqli_num_rows($result)>0){
+	echo "exist file";	
+	}	
+	else{
+		
+		$dstName= "uploads/".date('Ymd_his')."_".$srcName;
+    	$result=move_uploaded_file($tmpName, $dstName);
+
+		$query = "insert into File_Info(email,upload_time,file_name,file_path) Value('$email','$date','$srcName','$dstName')";
+
+		mysqli_query($connect,$query);
+		
+		echo $email;
+		
+	}
+			
+?>
+   ```
+
+ 4. Upload 데이터 저장
+
+|      File_Info DB         |    Server Uploads   |     
+| :-----------------------: | :----------------:  | 
+| ![image](https://user-images.githubusercontent.com/80194089/121165916-9756f580-c88b-11eb-9ca2-40e7067fa544.png) | ![image](https://user-images.githubusercontent.com/80194089/121166337-f288e800-c88b-11eb-8bf1-415b6a35020c.png) |
+|      업로드에 필요한 데이터를 저장한다.       |    업로드 한 이미지가 서버에 저장된다.   |
+
+
+
    ### Download
-   
+   1. KakoMap IMG Download주요 코드 설명 
+   - 이 코드는 업로드한 이미지를 다운받을 때 사용되는 코드입니다.   
    
     
   ## 알고리즘
   
-  ##
+  ## Launch
+  
   
 
   ## 차별화
+  - 기존의 사진공유 앱들은 사진의 공유가 자동화가 되지 않는다는 문제점들을 가지고 있었다. 이러한 문제를 해결하기 위해 Background Location을 이용하는 방법에 접근하였으며, 경도와 위도 즉, 위치를 이용하여 사진 업로드 및 다운로드 자동화를 구현해 차별화를 두었다. 
+  - 기존의 사진공유앱들에서 볼 수 없는 백그라운드 로케이션 알고리즘을 이용한 위치기반 이미지 업로드가 가능하며, 기존의 앱들은 사진의 업로드와 다운로드를 수동으로 해야 하는 불편함을 자동화 방식을 통해 편리하게 사진을 공유할 수 있습니다.
+  
   
   ## 배운점
-1) 안드로이드 스튜디오의 주요 언어인 JAVA에 대해 공부를 하며 프로젝트 진행 이전보다 JAVA에 대한 이해도와 활용능력이 증가하였다.
-2) 안드로이드 스튜디오와 연동하여 데이터를 송신해주는 PHP에 대한 이해도와 활용능력이 프로젝트 진행 이전보다 증가하였으며 또한, 웹서버의 사용법도 알 수 있었다.
-3) 프로젝트 진행에 있어서 미완성된 부분이 다소 존재했기에 프로젝트 진행과정을 다시 한 번 돌아보게 하는 계기가 되었다.
+  - 안드로이드 스튜디오의 주요 언어인 JAVA에 대해 공부를 하며 프로젝트 진행 이전보다 JAVA에 대한 이해도와 활용능력이 증가하였다.
+  - 안드로이드 스튜디오와 연동하여 데이터를 송신해주는 PHP에 대한 이해도와 활용능력이 프로젝트 진행 이전보다 증가하였으며 또한, 웹서버의 사용법도 알 수 있었다.
+  - 프로젝트 진행에 있어서 미완성된 부분이 다소 존재했기에 프로젝트 진행과정을 다시 한 번 돌아보게 하는 계기가 되었다.

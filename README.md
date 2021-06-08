@@ -406,7 +406,8 @@ if($d < 1) {
   - Background location 정보를 이용한 자동 사진공유 알고리즘 표 입니다.
   ![image](https://user-images.githubusercontent.com/80194089/121171981-28c96600-c892-11eb-9752-e86bd954dbcc.png)<br>
 
-  
+-------------------------------------------------------------------------------------------------------------- 
+
   ## Launch
   1. 앱이 실행이 되면 나오는 spalsh page와 사용자의 위치를 엑세스하여 접근을 허용하는 화면입니다.<br><br>
 |      SplashActivity       |  Access             |

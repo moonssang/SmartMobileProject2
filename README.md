@@ -42,7 +42,7 @@
   
  ## 다운로드 받기 전 필요한 부분
   ### groomIDE
-  어플리케이션을 실행시키기 위해서 웹 서버가 구축되어있어야 합니다. 웹서버 주소와 php 파일명을 안드로이드 request class에 입력해줍니다.
+  어플리케이션을 실행시키기 위해서 웹 서버가 구축되어있어야 합니다. 웹서버는 groomIDE를 사용하였으며, 웹서버 주소와 php 파일명을 안드로이드 request class에 입력해줍니다.
   
   ### KakaoMap
    MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.<br>
@@ -56,12 +56,6 @@
 복사한 절대경로를 Gradle Scripts의 build.gradle(Module)의 dependecies안에 있는 implementation files안에 넣어줍니다.
 ![5](https://user-images.githubusercontent.com/79883555/121133569-7a132e80-c86d-11eb-82c3-c516f42e4d9f.JPG)
 
-
-  
-  ### android
-  
-  
-  
   
   ## APP 주요 기술
    ### KakaoLogin
@@ -79,3 +73,6 @@
   ## 차별화
   
   ## 배운점
+1) 안드로이드 스튜디오의 주요 언어인 JAVA에 대해 공부를 하며 프로젝트 진행 이전보다 JAVA에 대한 이해도와 활용능력이 증가하였다.
+2) 안드로이드 스튜디오와 연동하여 데이터를 송신해주는 PHP에 대한 이해도와 활용능력이 프로젝트 진행 이전보다 증가하였으며 또한, 웹서버의 사용법도 알 수 있었다.
+3) 프로젝트 진행에 있어서 미완성된 부분이 다소 존재했기에 프로젝트 진행과정을 다시 한 번 돌아보게 하는 계기가 되었다.

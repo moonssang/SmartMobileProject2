@@ -409,13 +409,13 @@ if($d < 1) {
   
   ## Launch
   1. 앱이 실행이 되면 나오는 spalsh page와 사용자의 위치를 엑세스하여 접근을 허용하는 화면입니다.<br><br>
-|      SplashActivity |  Access  |
+|      SplashActivity       |  Access             |
 | :-----------------------: | :----------------:  | 
 | ![image](https://user-images.githubusercontent.com/80194089/121171134-100c8080-c891-11eb-93fb-f4930eba1131.png) | ![image](https://user-images.githubusercontent.com/80194089/121171160-1995e880-c891-11eb-8f08-3a8b8708a717.png) |
 |      어플리케이션 시작시 나오는 화면입니다.    |    권한 요청 사진입니다.   |<br><br>
 
 2. 사용자의 위치 정보를 접근 허용하면 카카오 로그인 페이지로 이동하게 됩니다. 다음 사진들은 카카오계정 로그인을 하는 페이지입니다.<br><br>
-|      KakaoLogin Page |  KakaoLogin  |
+|      KakaoLogin Page      |  KakaoLogin         |
 | :-----------------------: | :----------------:  | 
 | ![image](https://user-images.githubusercontent.com/80194089/121171661-b9ec0d00-c891-11eb-973f-c33eae275a95.png) | ![image](https://user-images.githubusercontent.com/80194089/121171685-c2dcde80-c891-11eb-8a09-fe3012e1512c.png) |
 |      카카오 로그인 시작 페이지입니다.   |  이메일과 비밀번호를 입력하여 로그인하는 페이지입니다.    |<br><br>

@@ -406,14 +406,13 @@ if($d < 1) {
   - Background location 정보를 이용한 자동 사진공유 알고리즘 표 입니다.
   ![image](https://user-images.githubusercontent.com/80194089/121171981-28c96600-c892-11eb-9752-e86bd954dbcc.png)<br>
 
--------------------------------------------------------------------------------------------------------------- 
 
   ## Launch
   1. 앱이 실행이 되면 나오는 spalsh page와 사용자의 위치를 엑세스하여 접근을 허용하는 화면입니다.<br><br>
-|      SplashActivity       |  Access             |
+|      SplashActivity         |    Access   |     
 | :-----------------------: | :----------------:  | 
-| ![image](https://user-images.githubusercontent.com/80194089/121171134-100c8080-c891-11eb-93fb-f4930eba1131.png) | ![image](https://user-images.githubusercontent.com/80194089/121171160-1995e880-c891-11eb-8f08-3a8b8708a717.png) |
-|      어플리케이션 시작시 나오는 화면입니다.    |    권한 요청 사진입니다.   |<br><br>
+| ![image](https://user-images.githubusercontent.com/79883555/121174884-624fa080-c895-11eb-9bc4-32142a4a09e0.png)| ![image](https://user-images.githubusercontent.com/79883555/121174902-68de1800-c895-11eb-8e11-f6f5ed7e6988.png) |
+|      어플리케이션 시작시 나오는 화면입니다.    |    권한 요청 사진입니다.    |<br><br>
 
 2. 사용자의 위치 정보를 접근 허용하면 카카오 로그인 페이지로 이동하게 됩니다. 다음 사진들은 카카오계정 로그인을 하는 페이지입니다.<br><br>
 |      KakaoLogin Page      |  KakaoLogin         |

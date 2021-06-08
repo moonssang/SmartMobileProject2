@@ -15,6 +15,7 @@
 
 - [다운로드 받기 전 필요한 부분](#goormIDE)
   - [goormIDE](#goormIDE)
+  - [KakaoMap](#KakoMap)
   - [android](#android)
 
 - [APP 주요 기술](#KakaoLogin)
@@ -42,6 +43,10 @@
  ## 다운로드 받기 전 필요한 부분
   ### groomIDE
   어플리케이션을 실행시키기 위해서 웹 서버가 구축되어있어야 합니다. 웹서버 주소와 php 파일명을 안드로이드 request class에 입력해줍니다.
+  
+  ### KakaoMap
+   MapActivity를 실행시키기 위해서는 libDaumMapAndroid.jar 파일의 절대경로를 복사하여 build.gradle 파일의 dependencies 부분에 넣어줍니다.
+  방법: Project -> app -> libs -> libDaumMapAndroid.jar 우클릭 -> copy -> copy path -> Absolute path -> build.gradle에 넣어주기
   
   ### android
   

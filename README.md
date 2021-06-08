@@ -1,7 +1,7 @@
 # SmartMobileProject 최종보고서 
 
-> 위치기반 사진공유 프로젝트 (팀원 : 문영호, 문현화, 박정하, 서범규, 손유현, 무러드)
-
+> 위치기반 사진 자동 공유 프로젝트 <br>
+> 팀원 : 201721164 문영호,  201921050 문현화,  201921056 박정하,  201921063 서범규,  201921064 손유현,  201990010 주라예브무러드
 
 **Requirements:**
   - 프로젝트 깃허브 주소 : https://github.com/youngho98/smartmobileproject
@@ -89,7 +89,7 @@
    1. KaKaoLogin 주요 코드 설명
    - 로그인에 성공하게 되면 자신의 이메일 정보를 데이터베이스에 저장하고 공유대상이 설정되어 있는 지를 판단합니다. 이 때 설정된 공유대상이 있다면 맵 액티비티로 이동하고, 공유대상이 설정되어 있지 않다면 공유대상설정 액티비티로 이동하여 공유대상의 이메일을 입력하여 데이터베이스에 저장해서 공유대상 정보를 저장하고 공유대상을 식별할 때 사용됩니다.
    
-   2. KakaologinActivity 코드 
+   2. android studio : KakaologinActivity 코드 
    
    ```java
     String serverUrl="https://phpproject-cparr.run.goorm.io/Kakaouser.php";
@@ -125,7 +125,7 @@
             }          
    ```
    
-   3. KakaoUser.php (서버)
+   3. groomIDE 서버 : KakaoUser.php 
    - SharedUser table에 $email(=사용자 email)과 $shared_email(=공유 대상자 이메일)을 echo문으로 데이터를 전송합니다.
    
    ```php
@@ -302,7 +302,6 @@ include "sqldisconnect.php";
 
 
 
-
 ---------------------------------------------------------------------------------------------------------------------------
    ### Download
    1. KakoMap IMG Download주요 코드 설명 
@@ -406,8 +405,9 @@ if($d < 1) {
   - Background location 정보를 이용한 자동 사진공유 알고리즘 표 입니다.
   ![image](https://user-images.githubusercontent.com/80194089/121171981-28c96600-c892-11eb-9752-e86bd954dbcc.png)<br>
 
-
+-------------------------------------------------------------------------------------------------------
   ## Launch
+  앱 실행 화면입니다. 
   
   1. 앱이 실행이 되면 나오는 spalsh page와 사용자의 위치를 엑세스하여 접근을 허용하는 화면입니다.<br><br>
   

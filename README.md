@@ -127,6 +127,7 @@
    ```
    
    - KakaoUser.php (서버)
+   SharedUser table에 $email(=사용자 email)과 $shared_email(=공유 대상자 이메일)을 echo문으로 데이터를 전송합니다.
    ```php
    <?php
 
@@ -163,7 +164,7 @@ include "sqldisconnect.php";
    - 백그라운드 로케이션 기능은 백그라운드 쓰레드를 생성함으로써 앱이 종료되어도 정해진 주기에 따라 사용자의 위치정보를 추적하여 데이터베이스에 저장함으로써 사용자의 위치를 주기적으로 갱신하는 알고리즘입니다. 
    
    - Background Service 코드 
-   
+    서버에서 불러온 위도, 경도 값으로 사용자 위치 정보를 불러옵니다.
    ```java
      if (ActivityCompat.checkSelfPermission(context1, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context1, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             Log.d("권한설정", "권한설정을 해주세요.");
@@ -190,9 +191,31 @@ include "sqldisconnect.php";
                 },0);
    ```
    
+   - UploadBackground Loaction.php  
+   사용자 위도, 경도, 이메일, 날짜 정보 데이터를 GET형태로 전송합니다.
+   ```php
+   <?php
+	
+	$connect = mysqli_connect("127.0.0.1","root1","1234","Project");
+
+	$longtitude = $_GET["longtitude"];
+	
+	$latitude = $_GET["latitude"];
+
+	$email = $_GET["email"];
+	
+	$Date = $_GET["time"];
+    
+ 	$query = "insert into Backgroundlocation(email,latitude,longtitude,date) Value('$email',$latitude,$longtitude,'$Date')";
+	mysqli_query($connect,$query);
+	
+	echo $query;
+	
+	include "sqldisconnect.php";
+	
+?>
    
-   
-   
+   ```
    
    ### KakaoMap
    

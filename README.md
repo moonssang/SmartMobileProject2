@@ -18,15 +18,16 @@
   - [android](#android)
   - [KakaoMap](#KakoMap)
  
-- [APP 주요 코드 및 실행과정](#KakaoLogin)
+- [APP 주요 코드](#KakaoLogin)
   - [KaKaoLogin](#KakaoLogin)
   - [Background Location](#Background)
   - [KakaoMap](#KakaoMap)
   - [IMG Upload](#Upload)
   - [IMG Download](#Download)
-  - [실행화면](#launch)
   
 - [알고리즘](#알고리즘)
+
+- [실행화면](#Launch)
 
 - [차별화](#차별화)
 
@@ -200,7 +201,10 @@ include "sqldisconnect.php";
    ### Download
    
    
+    
   ## 알고리즘
+  
+  ##
   
 
   ## 차별화

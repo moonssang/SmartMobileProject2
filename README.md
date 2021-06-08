@@ -23,17 +23,16 @@
   - [Background Location](#Background)
   - [KakaoMap IMG Upload](#Upload)
   - [KakaoMap IMG Download](#Download)
+  - [이미지 업로드 다운로드 알고리즘](#IMGAlgorithm)
   
-- [알고리즘](#알고리즘)
-
 - [실행화면](#Launch)
 
 - [차별화](#차별화)
 
 - [배운점](#배운점)
  
-  
------------------------------------------------------------------------------------------
+<br> 
+
  ## Topic
   ### 선정 배경 및 목적
   - 프로젝트 주제를 선정하기에 앞서 일상생활에서 겪는 불편함을 생각해보았습니다. 가족이나 친구, 연인끼리 여행을 가면 주로 한 사람이 모든 사진을 찍게 되는데 이 후 모든 사진을 다시 옮겨 주어야하는 불편함이 발생합니다. 
@@ -54,7 +53,7 @@
    2. 화면과 같이 화살표 버튼을 클릭하여 서버(new run.php)를 연결해줍니다. 
     ![image](https://user-images.githubusercontent.com/80194089/121147471-db41fe80-c87b-11eb-82de-b58fca48da49.png)
     
-  
+---------------------------------------------------------------------------------------------------  
   
   ### android
   - 프로젝트를 다운 받고 실행하는 과정입니다.
@@ -67,6 +66,7 @@
    
   3. master에서 'final branch'로 check out 해줍니다.
 
+------------------------------------------------------------------------------------------------------------------------------
 
   ### KakaoMap
   
@@ -304,10 +304,103 @@ include "sqldisconnect.php";
 ---------------------------------------------------------------------------------------------------------------------------
    ### Download
    1. KakoMap IMG Download주요 코드 설명 
-   - 이 코드는 업로드한 이미지를 다운받을 때 사용되는 코드입니다.   
+   - 사용자가 올린 사진의 위치정보와 사용자가 지정한 공유대상자의 위치정보가 일정 거리 이내로 일치할 경우 사용자가 업로드한 사진은 자동으로 공유됩니다.
+
+   2. android studio : Map Activity (IMG Download)
+   - server Url로 php 서버와 안드로이드 스튜디오를 연동했습니다.
+  
+  ```Java
+  public void downloadImage(String requestemail,String requestdate,Context mcontext){
+
+        String serverUrl="https://phpproject-cparr.run.goorm.io/downloadrequest.php";
+        String downloadUrl = "https://phpproject-cparr.run.goorm.io/";
+        long time = System.currentTimeMillis();
+        Date now = new Date(time);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy:MM:dd");
+        String nowdate = format.format(now);
+
+        SimpleMultiPartRequest smpr= new SimpleMultiPartRequest(Request.Method.POST, serverUrl, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("downloadsuccess",response);
+                String[] strarr = response.split("%");
+                for(int i = 0 ;i<strarr.length;i++){
+                    String[] finalarr = strarr[i].split("#");
+                    Log.d("finalarr", finalarr[1]);
+                    Log.d("finalname",finalarr[0]);
+                    String finalurl = downloadUrl + finalarr[1];
+                    Log.d("testurl",finalurl);
+                    DownloadManager downloadManager = (DownloadManager)getSystemService(mcontext.DOWNLOAD_SERVICE);
+                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(finalurl));
+                    File outputFile = new File("/storage/emulated/0/DCIM/"+nowdate+"/"+finalarr[0]);
+                    request.setDestinationUri(Uri.fromFile(outputFile));
+                    request.setTitle(finalarr[0]);
+                    request.setDescription("다운로드 중..");
+                    request.setNotificationVisibility(1);
+
+                    long enqueue = downloadManager.enqueue(request);
+                    Log.d("final","final");
+                }
+            }
+        }
+  
+  ```
+  
+  3. groomIDE 서버 : downloadrequest.php
+  - 사용자 이메일 데이터를 통해 업로드 된 이미지를 자동 다운로드 받을 수 있는 서버 코드이다. 
+   ```php
+   <?php
+	$connect = mysqli_connect("127.0.0.1", "root1", "1234", "Project");
+
+	$re_email = "ansdudgh98@naver.com";
+	$input_date = $_POST["request_date"];
+	
+	$date = date("Y-m-d");
+	
+	$query = "select * from File_Info where email = '".$re_email."' and upload_time like '".$date."%'";
+		
+	$result = mysqli_query($connect,$query);
+	$numrow = mysqli_num_rows($result);
+			
+	for($i=0; $i<$numrow; $i++){
+		$row[$i]=mysqli_fetch_array($result); 
+		echo $row[$i]["file_name"];
+		echo "#";
+		echo $row[$i]["file_path"];
+		echo "%";
+	}
+   ```
    
+   4. groomIDE 서버 : coordinate.php
+   - 사용자가 업로드한 이미지 파일과 공유대상자의 좌표를 계산하는 코드이다.
+   
+| param double $lat1  | param double $lon1 | param double $lat2 | param double $lon2 |
+| :----------------- :| :----------------: | :----------------: | :----------------: |
+| 이미지파일 좌표 위도 | 이미지파일 좌표 경도 | 공유대상자 좌표 위도 |공유대상자 좌표 경도 |
+
+```php
+function getDistance($lat1, $lng1, $lat2, $lng2) { 
+$earth_radius = 6371; 
+$dLat = deg2rad($lat2 - $lat1);
+$dLon = deg2rad($lng2 - $lng1); 
+$a = sin($dLat/2) * sin($dLat/2) + cos(deg2rad($lat1)) * cos(deg2rad($lat2)) * sin($dLon/2) * sin($dLon/2); 
+$c = 2 * asin(sqrt($a)); 
+$d = $earth_radius * $c; 
+return $d: // km 거리반환
+//return * 1000; // m 거리 반환
+}
+
+// 거리가 1km 이내 일 경우 사진 다운로드
+if($d < 1) {
+	//echo json_encode
+	$jsonData = json_encode($arr);
+	echo "$jsonData"
+		
+	//사진 다운로드
+}
+```
     
-  ## 알고리즘
+  ### IMGAlgorithm
   
   ## Launch
   
